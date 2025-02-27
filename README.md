@@ -9,6 +9,10 @@
 
 ### Test
 - main.ts에서 전체 실행 흐름 확인 가능
+  1. deploy
+  2. setPeer
+  3. setEnforcedOptions
+  4. send
 
 - ethers와 zksync-ethers 내부의 ethers 버전 차이로 `-f` 옵션 사용
 ```
