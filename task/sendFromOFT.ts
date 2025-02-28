@@ -1,5 +1,4 @@
 import { ethers } from "ethers";
-import { chains } from "../config/config";
 
 export const sendFromOFT = async (fromChain, toChain, amount) => {
 
@@ -15,7 +14,7 @@ export const sendFromOFT = async (fromChain, toChain, amount) => {
         ethers.zeroPadValue(toChain.wallet.address, 32),
         tokensToSend,
         tokensToSend,
-        '0x',
+        '0x', // extra message execution option
         '0x',
         '0x',
     ]

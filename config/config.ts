@@ -1,5 +1,5 @@
-import { Contract, ContractFactory, ethers, Wallet } from "ethers"
-import { Contract as zkContract, ContractFactory as zkContractFactory, Wallet as zkWallet, Provider as zkProvider } from "zksync-ethers"
+import { Contract, ContractFactory, ethers, Transaction, Wallet } from "ethers"
+// import { Contract as zkContract, ContractFactory as zkContractFactory, Wallet as zkWallet, Provider as zkProvider } from "zksync-ethers"
 
 // import mainet_config from './layerzero-v2-deployments-mainnet.json'
 import testnet_config from './layerzero-v2-deployments-testnet.json'
@@ -18,10 +18,10 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 if (
     !PRIVATE_KEY
-    || process.env.CUBE_RPC
-    || process.env.BSC_RPC
-    || process.env.SEPOLIA_RPC
-    || process.env.ZKSYNC_RPC
+    || !process.env.CUBE_RPC
+    || !process.env.BSC_RPC
+    || !process.env.SEPOLIA_RPC
+    || !process.env.ZKSYNC_RPC
 ) {
     throw new Error("Please check .env file!");
 }
@@ -41,9 +41,9 @@ const sepoliaWallet = new Wallet(
     new ethers.JsonRpcProvider(process.env.SEPOLIA_RPC)
 )
 
-const zkSyncWallet = new zkWallet(
+const zkSyncWallet = new Wallet(
     PRIVATE_KEY,
-    new zkProvider(process.env.ZKSYNC_RPC)
+    new ethers.JsonRpcProvider(process.env.ZKSYNC_RPC)
 )
 
 const cubeOFT = process.env.CUBE_OFT
@@ -80,8 +80,8 @@ export const chains = {
         name: "zkSync sepolia",
         wallet: zkSyncWallet,
         lzConfig: testnet_config['zkSync-Sepolia-Testnet'],
-        contractFactory: new zkContractFactory(zkXplaOFTAbi, zkXplaOFTBytecode.bytecode, zkSyncWallet),
-        oftContract: new zkContract(zkSyncOFT, zkXplaOFTAbi, zkSyncWallet),
+        contractFactory: new ContractFactory(zkXplaOFTAbi, zkXplaOFTBytecode.bytecode, zkSyncWallet),
+        oftContract: new Contract(zkSyncOFT, zkXplaOFTAbi, zkSyncWallet),
         oftAddress: zkSyncOFT
     }
 }
