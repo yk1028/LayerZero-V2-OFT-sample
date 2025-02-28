@@ -1,6 +1,5 @@
 import { Contract, ContractFactory, ethers, Wallet } from "ethers"
 import { Contract as zkContract, ContractFactory as zkContractFactory, Wallet as zkWallet, Provider as zkProvider } from "zksync-ethers"
-import { Options } from "@layerzerolabs/lz-v2-utilities";
 
 // import mainet_config from './layerzero-v2-deployments-mainnet.json'
 import testnet_config from './layerzero-v2-deployments-testnet.json'
@@ -17,28 +16,34 @@ dotenv.config();
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
-if (!PRIVATE_KEY) {
-    throw new Error("Wallet private key is not configured in .env file!");
+if (
+    !PRIVATE_KEY
+    || process.env.CUBE_RPC
+    || process.env.BSC_RPC
+    || process.env.SEPOLIA_RPC
+    || process.env.ZKSYNC_RPC
+) {
+    throw new Error("Please check .env file!");
 }
 
 const cubeWallet = new Wallet(
     PRIVATE_KEY,
-    new ethers.JsonRpcProvider("https://cube-evm-rpc.xpla.dev/")
+    new ethers.JsonRpcProvider(process.env.CUBE_RPC)
 )
 
 const bscWallet = new Wallet(
     PRIVATE_KEY,
-    new ethers.JsonRpcProvider("https://bsc-testnet.drpc.org")
+    new ethers.JsonRpcProvider(process.env.BSC)
 )
 
 const sepoliaWallet = new Wallet(
     PRIVATE_KEY,
-    new ethers.JsonRpcProvider("https://ethereum-sepolia-rpc.publicnode.com")
+    new ethers.JsonRpcProvider(process.env.SEPOLIA_RPC)
 )
 
 const zkSyncWallet = new zkWallet(
     PRIVATE_KEY,
-    new zkProvider("https://sepolia.era.zksync.dev")
+    new zkProvider(process.env.ZKSYNC_RPC)
 )
 
 const cubeOFT = process.env.CUBE_OFT
