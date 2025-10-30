@@ -6,7 +6,7 @@ export const setDVNs = async (fromChain, toChain) => {
 
   // Configuration
   const cubeUlnConfig = {
-    confirmations: 5, // BigInt for uint64, replace with actual
+    confirmations: 1, // BigInt for uint64, replace with actual
     requiredDVNCount: 1, // Example value, replace with actual
     optionalDVNCount: 0, // Example value, replace with actual
     optionalDVNThreshold: 0, // Example value, replace with actual
@@ -21,9 +21,9 @@ export const setDVNs = async (fromChain, toChain) => {
   await setReceiveConfig(fromChain, toChain, cubeUlnConfig)
 
 
-  
+
   const sepoliaUlnConfig = {
-    confirmations: 5, // BigInt for uint64, replace with actual
+    confirmations: 1, // BigInt for uint64, replace with actual
     requiredDVNCount: 1, // Example value, replace with actual
     optionalDVNCount: 0, // Example value, replace with actual
     optionalDVNThreshold: 0, // Example value, replace with actual

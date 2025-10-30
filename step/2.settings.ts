@@ -1,6 +1,7 @@
 import { chains } from "../config/config"
 import { setEnforcedOptions } from "../task/setEnforcedOptions"
 import { setPeer } from "../task/setPeers"
+import { setDVNs } from "../task/setDVNs"
 
 // 전체 실행 절차
 const main = async () => {
@@ -16,8 +17,6 @@ const main = async () => {
 
     // 3.setDVNs
     await setDVNs(chains.cube, chains.sepolia)
-    await setDVNs(chains.sepolia, chains.cube)
-
 }
 
 main()

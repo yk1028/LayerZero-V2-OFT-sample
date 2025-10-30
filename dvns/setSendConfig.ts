@@ -7,7 +7,7 @@ async function setSendConfig(fromChain, toChain) {
   const YOUR_ENDPOINT_CONTRACT_ADDRESS = fromChain.lzConfig.endpointV2;
 
   const ulnConfig = {
-    confirmations: 5, // BigInt for uint64, replace with actual
+    confirmations: 1, // BigInt for uint64, replace with actual
     requiredDVNCount: 1, // Example value, replace with actual
     optionalDVNCount: 0, // Example value, replace with actual
     optionalDVNThreshold: 0, // Example value, replace with actual

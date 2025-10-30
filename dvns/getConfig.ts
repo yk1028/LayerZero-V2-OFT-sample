@@ -92,5 +92,5 @@ const getUlnConfig = async (fromChain, toChain) => {
 
 }
 
-// getUlnConfig(chains.cube, chains.sepolia);
-getUlnConfig(chains.sepolia, chains.cube);
+getUlnConfig(chains.cube, chains.sepolia);
+// getUlnConfig(chains.sepolia, chains.cube);
