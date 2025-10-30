@@ -1,49 +1,39 @@
-import { Options } from "@layerzerolabs/lz-v2-utilities";
-import { chains } from "../config/config";
 
-const ethers = require('ethers');
+import { setSendConfig } from "./setSendConfig";
+import { setReceiveConfig } from "./setReceiveConfig";
 
-function generateDVNParams(_eid, _confirmations, _dvn) {
+export const setDVNs = async (fromChain, toChain) => {
+
+  // Configuration
+  const cubeUlnConfig = {
+    confirmations: 5, // BigInt for uint64, replace with actual
+    requiredDVNCount: 1, // Example value, replace with actual
+    optionalDVNCount: 0, // Example value, replace with actual
+    optionalDVNThreshold: 0, // Example value, replace with actual
+    requiredDVNs: ['0x0747D0dabb284E5FBaEEeA427BBa7b2fba507120'], // Replace with actual addresses, must be in alphabetical order '0x000000000000000000000000000000000000dEaD', '0x0747D0dabb284E5FBaEEeA427BBa7b2fba507120'
+    optionalDVNs: [], // Replace with actual addresses, must be in alphabetical order
+  };
+
+  console.log(`\n[setSendConfig ${fromChain.name} -> ${toChain.name}]`)
+  await setSendConfig(fromChain, toChain, cubeUlnConfig)
+
+  console.log(`\n[setReceiveConfig ${fromChain.name} -> ${toChain.name}]`)
+  await setReceiveConfig(fromChain, toChain, cubeUlnConfig)
+
+
   
-    // Encode UlnConfig using AbiCoder
-    const configTypeUlnStruct =
-      'tuple(uint64 confirmations, uint8 requiredDVNCount, uint8 optionalDVNCount, uint8 optionalDVNThreshold, address[] requiredDVNs, address[] optionalDVNs)';
-  
-  
-    const ulnConfig = {
-      confirmations: _confirmations, // Changed to BigInt
-      requiredDVNCount: 1,
-      optionalDVNCount: 0,
-      optionalDVNThreshold: 0,
-      requiredDVNs: [_dvn],
-      optionalDVNs: [],
-    };
-  
-    const encodedUlnConfig = ethers.AbiCoder.defaultAbiCoder().encode(
-      [configTypeUlnStruct],
-      [ulnConfig]
-    );
-  
-    const params = {
-      eid: _eid,
-      configType: 2, // ULN_CONFIG_TYPE
-      config: encodedUlnConfig,
-    };
-  
-    return params
-  }
+  const sepoliaUlnConfig = {
+    confirmations: 5, // BigInt for uint64, replace with actual
+    requiredDVNCount: 1, // Example value, replace with actual
+    optionalDVNCount: 0, // Example value, replace with actual
+    optionalDVNThreshold: 0, // Example value, replace with actual
+    requiredDVNs: ['0x8eebf8b423B73bFCa51a1Db4B7354AA0bFCA9193'], // Replace with actual addresses, must be in alphabetical order '0x000000000000000000000000000000000000dEaD', '0x0747D0dabb284E5FBaEEeA427BBa7b2fba507120'
+    optionalDVNs: [], // Replace with actual addresses, must be in alphabetical order
+  };
 
-export const setEnforcedOptions = async (chain) => {
+  console.log(`\n[setSendConfig ${toChain.name} -> ${fromChain.name}]`)
+  await setSendConfig(toChain, fromChain, sepoliaUlnConfig)
 
-    const params = generateDVNParams(chain.lzConfig.eid, 5, chain.wallet.address)
-
-    console.log(params)
-
-    // const tx = await chain.oftContract.setConfig(params)
-    
-    // const receipt = await tx.wait()
-
-    // console.log(receipt)
+  console.log(`\n[setReceiveConfig ${toChain.name} -> ${fromChain.name}]`)
+  await setReceiveConfig(toChain, fromChain, sepoliaUlnConfig)
 }
-
-setEnforcedOptions(chains.cube)

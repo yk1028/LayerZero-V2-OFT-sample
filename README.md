@@ -28,6 +28,6 @@
   4. sendFromSepiliaToCube
   ```
 
-- dvn 설정은 `./dvn`에 따로 작성
+- dvn 관련 개별 테스트 가능하도록 `./dvn`에 추가로 작성
 
 
