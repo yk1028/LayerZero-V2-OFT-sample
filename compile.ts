@@ -54,4 +54,5 @@ function findImports(relativePath) {
 
 }
 
-// compile("XplaNativeOFTAdapter");
+// 컴파일 실행 ./contracts 폴더 내 파일명 컴파일
+compile("XplaNativeOFTAdapter");

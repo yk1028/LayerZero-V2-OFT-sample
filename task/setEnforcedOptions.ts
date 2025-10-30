@@ -27,5 +27,3 @@ export const setEnforcedOptions = async (chain) => {
 
     console.log(receipt)
 }
-
-setEnforcedOptions(chains.zkSync_sepolia)

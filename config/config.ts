@@ -46,10 +46,10 @@ const zkSyncWallet = new Wallet(
     new ethers.JsonRpcProvider(process.env.ZKSYNC_RPC)
 )
 
-const cubeOFT = process.env.CUBE_OFT
-const bscOFT = process.env.BSC_OFT
-const sepoliaOFT = process.env.SEPOLIA_OFT
-const zkSyncOFT = process.env.ZKSYNC_OFT
+const cubeOFT = ethers.getAddress(process.env.CUBE_OFT)
+const bscOFT = ethers.getAddress(process.env.BSC_OFT)
+const sepoliaOFT = ethers.getAddress(process.env.SEPOLIA_OFT)
+const zkSyncOFT = ethers.getAddress(process.env.ZKSYNC_OFT)
 
 export const chains = {
     cube: {

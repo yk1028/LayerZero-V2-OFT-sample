@@ -7,25 +7,22 @@
 - sepolia, bsc-testnet, zkSync-sepolia
   - XplaOFT
 
-### Test
-- main.ts에서 전체 실행 흐름 확인 가능
-  1. deploy
-  2. setPeer
-  3. setEnforcedOptions
-  4. send
+## Compile
+- compile.ts를 실행하여 contracts 디렉토리 내의 컨트랙트 컴파일 가능
+- 이름으로 파일 지정, 하단 주석 제거 후 실행
 
+### Test
 - ethers와 zksync-ethers 내부의 ethers 버전 차이로 `-f` 옵션 사용
 ```
 npm i -f
 ``` 
 
-- .env example
-```
-PRIVATE_KEY="{your private key}"
+- ./step에 실행 순서 예시
+  1. deployAll
+  2. settings
+  3. sendFromCubeToSepolia
+  4. sendFromSepiliaToCube
 
-CUBE_OFT="{cube contaract address}"
-BSC_OFT ="{bsc-testnet contaract address}"
-SEPOLIA_OFT ="{sepolia contaract address}"
-ZKSYNC_OFT="{zksync contaract address}"
-```
-  
+- dvn 설정은 ./dvn에 따로 작성
+
+- .env.example 참고하여 .env 설정 필요
